@@ -1,0 +1,50 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    container_name: app
+    restart: unless-stopped
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    networks:
+      - techease_network
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: techease_db
+      MYSQL_USER: techease_user
+      MYSQL_PASSWORD: password123
+      MYSQL_ROOT_PASSWORD: admin123
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - techease_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_server
+    restart: unless-stopped
+    ports:
+      # Kita petakan ke port 8080 di laptop agar tidak bentrok dengan port 80 bawaan OS
+      - "8081:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - techease_network
+
+networks:
+  techease_network:
+    driver: bridge
+
+volumes:
+  db_data:
