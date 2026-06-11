@@ -55,7 +55,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Tim cards - warna disesuaikan dengan palet, gambar tetap sama -->
+                
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -67,7 +67,7 @@
                     <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Project Manager</p>
                     <p class="text-sm text-text/70">Pengambil keputusan strategis, koordinasi tim, dan manajemen siklus proyek.</p>
                 </div>
-                <!-- Lanjutkan untuk member tim lain dengan pola serupa -->
+
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -79,7 +79,55 @@
                     <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Lead Operations</p>
                     <p class="text-sm text-text/70">Manajemen operasional utama dan optimalisasi alur kerja layanan.</p>
                 </div>
-                <!-- Sisa anggota tim (nabib, thoriq, raisa, ady) sesuaikan dengan pola di atas, gunakan primary/accent sesuai selera -->
+
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/nabib.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Nabib+Khalish&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Nabib Khalish Alfayadh</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Junior Operations</p>
+                    <p class="text-sm text-text/70">Dukungan operasional lapangan dan monitoring kualitas layanan teknis.</p>
+                </div>
+
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/thoriq.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Thoriq&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Muhammad Thoriq Al-Fath</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Lead Developer</p>
+                    <p class="text-sm text-text/70">Arsitektur sistem, pengembangan core engine, dan inovasi teknologi.</p>
+                </div>
+
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/raisa.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=M+Raisa+Qisti&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">M. Raisa Qisti Raihan</h5>
+                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Junior Developer</p>
+                    <p class="text-sm text-text/70">Pengembangan antarmuka pengguna dan maintenance modul sistem.</p>
+                </div>
+
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/ady.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ady+Eka&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Ady Eka Apriliansyah</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Security Specialist</p>
+                    <p class="text-sm text-text/70">Perlindungan data sensitif, audit keamanan, dan pertahanan sistem.</p>
+                </div>
+
             </div>
         </section>
     </div>
