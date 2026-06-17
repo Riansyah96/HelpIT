@@ -1,38 +1,36 @@
-FROM php:8.4-fpm
+FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    zip \
-    libzip-dev \
-    unzip \
     git \
     curl \
-    gnupg
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
 
-# Install Node.js (Versi 20 LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql gd zip
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
 WORKDIR /var/www
-COPY . .
 
-# Jalankan composer dan npm build
-RUN composer install --no-dev --optimize-autoloader
-RUN npm install && npm run build
+# Copy existing application directory contents
+COPY . /var/www
 
-# PERBAIKAN: Pastikan folder storage dan cache dibuat terlebih dahulu sebelum chown
-RUN mkdir -p /var/www/storage /var/www/cache && \
-    chown -R www-data:www-data /var/www/storage /var/www/cache
+# Install dependencies (if composer.json exists)
+RUN if [ -f "composer.json" ]; then composer install --no-interaction --optimize-autoloader --no-dev; fi
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 9000
 CMD ["php-fpm"]
