@@ -1,13 +1,13 @@
 name: Deploy to Production
 
 on:
-  # Memungkinkan Anda menjalankan workflow secara manual dari tab Actions
+  # Jalankan manual dari tab Actions
   workflow_dispatch:
 
-  # Otomatis berjalan ketika ada push ke branch main
+  # Otomatis saat push ke main
   push:
     branches:
-      - main   # Ganti dengan branch produksi Anda (misal: master)
+      - main
 
 jobs:
   build-and-deploy:
@@ -21,7 +21,6 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          # Gunakan nama secret yang ADA di repo Anda: DockerHub_TOKEN
           password: ${{ secrets.DockerHub_TOKEN }}
 
       - name: Build and push app image
@@ -34,6 +33,13 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/laravel-app:latest
             ${{ secrets.DOCKER_USERNAME }}/laravel-app:${{ github.sha }}
 
+      # === DEBUG: Cek koneksi ke server sebelum deploy ===
+      - name: Debug SSH connectivity
+        run: |
+          echo "Testing SSH connection to ${{ secrets.SSH_HOST }} on port ${{ secrets.SSH_PORT }}"
+          timeout 10s nc -zv ${{ secrets.SSH_HOST }} ${{ secrets.SSH_PORT }} || echo "Port ${{ secrets.SSH_PORT }} is NOT reachable. Please check your firewall."
+
+      # === DEPLOY via SSH ===
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -41,20 +47,26 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          # Tambahkan timeout lebih panjang (opsional, default 30s)
-          timeout: 60s
+          timeout: 60s               # time untuk koneksi
+          command_timeout: 10m       # time untuk menjalankan script
+          # Jika ada masalah dengan cipher, bisa aktifkan opsi di bawah (tapi biasanya tidak perlu)
+          # use_insecure_cipher: true
+          # cipher: aes256-ctr
           script: |
-            # Masuk ke direktori project
-            cd /var/www/techease
+            set -e  # hentikan jika ada error
+            echo "Masuk ke direktori project"
+            cd /var/www/techease || { echo "Direktori tidak ditemukan"; exit 1; }
 
-            # Pull image terbaru dari Docker Hub
+            echo "Pull image terbaru dari Docker Hub"
             docker compose pull app
 
-            # Hentikan container lama
+            echo "Hentikan container lama"
             docker compose down
 
-            # Jalankan container baru
+            echo "Jalankan container baru"
             docker compose up -d
 
-            # Hapus image yang tidak terpakai
+            echo "Hapus image yang tidak terpakai"
             docker image prune -f
+
+            echo "Deploy selesai!"
