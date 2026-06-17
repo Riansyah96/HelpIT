@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted   # atau ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -17,16 +17,26 @@ jobs:
         run: |
           for i in 1 2 3 4 5; do
             echo "Attempt $i login..."
-            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
             if [ $? -eq 0 ]; then break; fi
             sleep 10
           done
 
-      - name: Build and push image
+      - name: Build and push image (with retry)
         run: |
+          # Build image
           docker build -t ${{ secrets.DOCKER_USERNAME }}/laravel-app:latest -t ${{ secrets.DOCKER_USERNAME }}/laravel-app:${{ github.sha }} .
-          docker push ${{ secrets.DOCKER_USERNAME }}/laravel-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/laravel-app:${{ github.sha }}
+
+          # Push dengan retry
+          for tag in latest ${{ github.sha }}; do
+            for i in 1 2 3 4 5; do
+              echo "Pushing tag $tag, attempt $i..."
+              docker push ${{ secrets.DOCKER_USERNAME }}/laravel-app:$tag
+              if [ $? -eq 0 ]; then break; fi
+              echo "Push failed, retrying in 10 seconds..."
+              sleep 10
+            done
+          done
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.0
