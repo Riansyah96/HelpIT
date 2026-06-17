@@ -112,7 +112,7 @@
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/shofiy.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Shofiyyurrohman&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/shofiyurohman.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Shofiyyurrohman&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Muhammad Shofiyyurrohman</h5>
@@ -125,7 +125,7 @@
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/haydar.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Haydar+Ali+Ayyubi&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/haydar.jpeg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Haydar+Ali+Ayyubi&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Haydar Ali Ayyubi</h5>
@@ -138,7 +138,7 @@
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/ayu.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ayu+Nur+Intany&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/Ayu.jpeg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ayu+Nur+Intany&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Ayu Nur Intany</h5>
