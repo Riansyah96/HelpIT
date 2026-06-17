@@ -55,79 +55,109 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+                <!-- 1. Umar Al Faruq - Senior Developer -->
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/anam.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Khoirul+Anam&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/umar.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Umar+Al+Faruq&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
-                    <h5 class="text-xl font-black text-white mb-1">Muhammad Khoirul Anam</h5>
-                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Project Manager</p>
-                    <p class="text-sm text-text/70">Pengambil keputusan strategis, koordinasi tim, dan manajemen siklus proyek.</p>
+                    <h5 class="text-xl font-black text-white mb-1">Umar Al Faruq</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Senior Developer</p>
+                    <p class="text-sm text-text/70">Mengarsiteki solusi teknis dan mentoring tim pengembangan.</p>
                 </div>
 
+                <!-- 2. Arief Rachman Apriansyah - Lead Developer -->
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/arief.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Arief+Rachman&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/arief.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Arief+Rachman+Apriansyah&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Arief Rachman Apriansyah</h5>
-                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Lead Operations</p>
-                    <p class="text-sm text-text/70">Manajemen operasional utama dan optimalisasi alur kerja layanan.</p>
+                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Lead Developer</p>
+                    <p class="text-sm text-text/70">Memimpin pengembangan sistem dan memastikan kualitas kode.</p>
                 </div>
 
+                <!-- 3. Muhammad Arkan Al Hakim - Developer -->
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/nabib.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Nabib+Khalish&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/arkan.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Arkan+Al+Hakim&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
-                    <h5 class="text-xl font-black text-white mb-1">Nabib Khalish Alfayadh</h5>
-                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Junior Operations</p>
-                    <p class="text-sm text-text/70">Dukungan operasional lapangan dan monitoring kualitas layanan teknis.</p>
+                    <h5 class="text-xl font-black text-white mb-1">Muhammad Arkan Al Hakim</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Developer</p>
+                    <p class="text-sm text-text/70">Mengimplementasikan fitur dan melakukan perbaikan bug secara intensif.</p>
                 </div>
 
-                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
-                    <div class="relative mb-6 inline-block">
-                        <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/thoriq.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Thoriq&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        </div>
-                    </div>
-                    <h5 class="text-xl font-black text-white mb-1">Muhammad Thoriq Al-Fath</h5>
-                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Lead Developer</p>
-                    <p class="text-sm text-text/70">Arsitektur sistem, pengembangan core engine, dan inovasi teknologi.</p>
-                </div>
-
+                <!-- 4. Muhamad Yordan Al zisky - Design -->
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/raisa.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=M+Raisa+Qisti&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/yordan.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhamad+Yordan+Al+zisky&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
-                    <h5 class="text-xl font-black text-white mb-1">M. Raisa Qisti Raihan</h5>
-                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Junior Developer</p>
-                    <p class="text-sm text-text/70">Pengembangan antarmuka pengguna dan maintenance modul sistem.</p>
+                    <h5 class="text-xl font-black text-white mb-1">Muhamad Yordan Al zisky</h5>
+                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Design</p>
+                    <p class="text-sm text-text/70">Merancang antarmuka pengguna yang intuitif dan estetis.</p>
                 </div>
 
+                <!-- 5. Muhammad Shofiyyurrohman - Project Manager -->
                 <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/ady.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ady+Eka&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/shofiy.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Shofiyyurrohman&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
-                    <h5 class="text-xl font-black text-white mb-1">Ady Eka Apriliansyah</h5>
-                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Security Specialist</p>
-                    <p class="text-sm text-text/70">Perlindungan data sensitif, audit keamanan, dan pertahanan sistem.</p>
+                    <h5 class="text-xl font-black text-white mb-1">Muhammad Shofiyyurrohman</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Project Manager</p>
+                    <p class="text-sm text-text/70">Mengelola jadwal, sumber daya, dan komunikasi proyek.</p>
                 </div>
 
+                <!-- 6. Haydar Ali Ayyubi - Design -->
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/haydar.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Haydar+Ali+Ayyubi&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Haydar Ali Ayyubi</h5>
+                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Design</p>
+                    <p class="text-sm text-text/70">Merancang antarmuka pengguna yang intuitif dan estetis.</p>
+                </div>
+
+                <!-- 7. Ayu Nur Intany - Scrum Master -->
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-primary/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/ayu.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ayu+Nur+Intany&background=0EA5E9&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Ayu Nur Intany</h5>
+                    <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Scrum Master</p>
+                    <p class="text-sm text-text/70">Memfasilitasi proses Scrum dan kolaborasi tim.</p>
+                </div>
+
+                <!-- 8. Ammar Muhammad Khadafi - Media Kreatif -->
+                <div class="group bg-surface/50 backdrop-blur-xl border border-surface rounded-3xl p-8 text-center shadow-xl hover:shadow-accent/10 transition-all duration-500">
+                    <div class="relative mb-6 inline-block">
+                        <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
+                            <img src="{{ asset('assets/img/team/ammar.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Ammar+Muhammad+Khadafi&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <h5 class="text-xl font-black text-white mb-1">Ammar Muhammad Khadafi</h5>
+                    <p class="text-accent text-xs font-black uppercase tracking-widest mb-4">Media Kreatif</p>
+                    <p class="text-sm text-text/70">Mengelola konten kreatif dan strategi promosi.</p>
+                </div>
             </div>
         </section>
     </div>
