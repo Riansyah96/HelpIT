@@ -1,37 +1,25 @@
 name: Deploy to Production
 
 on:
-  # Memungkinkan menjalankan manual dari tab Actions
   workflow_dispatch:
-
-  # Otomatis berjalan saat push ke branch main
   push:
     branches:
       - main
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted   # <-- INI PENTING
 
     steps:
-      # ============================================
-      # STEP 1: Checkout kode dari repository
-      # ============================================
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ============================================
-      # STEP 2: Login ke Docker Hub
-      # ============================================
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DockerHub_TOKEN }}
 
-      # ============================================
-      # STEP 3: Build dan Push image ke Docker Hub
-      # ============================================
       - name: Build and push app image
         uses: docker/build-push-action@v5
         with:
@@ -42,198 +30,12 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/laravel-app:latest
             ${{ secrets.DOCKER_USERNAME }}/laravel-app:${{ github.sha }}
 
-      # ============================================
-      # STEP 4: DEBUG - Cek koneksi SSH ke server
-      # ============================================
-      - name: Debug SSH Connectivity
-        id: ssh_debug
+      - name: Deploy to Server (Local Runner)
         run: |
-          echo "=========================================="
-          echo "🔍 MENGECEK KONEKSI KE SERVER..."
-          echo "Host    : ${{ secrets.SSH_HOST }}"
-          echo "Port    : ${{ secrets.SSH_PORT }}"
-          echo "User    : ${{ secrets.SSH_USER }}"
-          echo "=========================================="
-
-          # Cek apakah port terbuka menggunakan nc (netcat)
-          if timeout 10s nc -zv ${{ secrets.SSH_HOST }} ${{ secrets.SSH_PORT }} 2>&1; then
-            echo "✅ Port ${{ secrets.SSH_PORT }} TERBUKA! Koneksi bisa dilakukan."
-            echo "status=success" >> $GITHUB_OUTPUT
-          else
-            echo "❌ Port ${{ secrets.SSH_PORT }} TERTUTUP! (i/o timeout atau connection refused)"
-            echo "=========================================="
-            echo "⚠️  SOLUSI:"
-            echo "1. Buka port ${{ secrets.SSH_PORT }} di Panel IDCloudHost"
-            echo "   → NETWORK → Security Groups → Inbound Rules"
-            echo "   → Tambahkan: TCP Port ${{ secrets.SSH_PORT }} Source 0.0.0.0/0"
-            echo "2. Jika sudah, hubungi Support IDCloudHost minta bantuan."
-            echo "=========================================="
-            echo "status=failed" >> $GITHUB_OUTPUT
-            exit 1
-          fi
-
-      # ============================================
-      # STEP 5: DEPLOY via SSH (dengan error handling)
-      # ============================================
-      - name: Deploy to server via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          timeout: 60s
-          command_timeout: 15m
-          script: |
-            # =============================================
-            # KONFIGURASI: Hentikan eksekusi jika ada error
-            # =============================================
-            set -e
-            set -x  # Tampilkan setiap perintah yang dijalankan (debug mode)
-
-            # =============================================
-            # CEK 1: Apakah direktori project ada?
-            # =============================================
-            echo "=========================================="
-            echo "📂 MENGECEK DIREKTORI PROJECT..."
-            echo "=========================================="
-
-            if [ ! -d "/var/www/techease" ]; then
-              echo "❌ ERROR: Direktori /var/www/techease TIDAK DITEMUKAN!"
-              echo "   Pastikan folder project sudah ada di server."
-              echo "   Buat folder: mkdir -p /var/www/techease"
-              exit 1
-            else
-              echo "✅ Direktori /var/www/techease ditemukan."
-            fi
-
-            # Masuk ke direktori
-            cd /var/www/techease || {
-              echo "❌ ERROR: Gagal pindah ke /var/www/techease"
-              exit 1
-            }
-
-            # =============================================
-            # CEK 2: Apakah file docker-compose.yml ada?
-            # =============================================
-            echo "=========================================="
-            echo "📦 MENGECEK FILE DOCKER-COMPOSE.YML..."
-            echo "=========================================="
-
-            if [ ! -f "docker-compose.yml" ]; then
-              echo "❌ ERROR: File docker-compose.yml TIDAK DITEMUKAN!"
-              echo "   Pastikan file docker-compose.yml ada di /var/www/techease"
-              exit 1
-            else
-              echo "✅ File docker-compose.yml ditemukan."
-            fi
-
-            # =============================================
-            # CEK 3: Apakah Docker dan Docker Compose terinstall?
-            # =============================================
-            echo "=========================================="
-            echo "🐳 MENGECEK DOCKER & DOCKER COMPOSE..."
-            echo "=========================================="
-
-            if ! command -v docker &> /dev/null; then
-              echo "❌ ERROR: Docker TIDAK TERINSTALL!"
-              echo "   Install docker: curl -fsSL https://get.docker.com | sh"
-              exit 1
-            else
-              echo "✅ Docker terinstall: $(docker --version)"
-            fi
-
-            if ! command -v docker compose &> /dev/null; then
-              echo "❌ ERROR: Docker Compose TIDAK TERINSTALL!"
-              echo "   Install docker compose: sudo apt install docker-compose-plugin"
-              exit 1
-            else
-              echo "✅ Docker Compose terinstall: $(docker compose version)"
-            fi
-
-            # =============================================
-            # PROSES DEPLOY
-            # =============================================
-            echo "=========================================="
-            echo "🚀 MEMULAI PROSES DEPLOY..."
-            echo "=========================================="
-
-            # 1. Pull image terbaru
-            echo "📥 Pull image terbaru dari Docker Hub..."
-            if docker compose pull app; then
-              echo "✅ Pull image berhasil."
-            else
-              echo "❌ ERROR: Gagal pull image dari Docker Hub!"
-              echo "   Periksa:"
-              echo "   1. Username/token Docker Hub (secrets.DOCKER_USERNAME / DockerHub_TOKEN)"
-              echo "   2. Nama image di docker-compose.yml sudah benar"
-              echo "   3. Image benar-benar ada di Docker Hub"
-              exit 1
-            fi
-
-            # 2. Hentikan container lama
-            echo "🛑 Menghentikan container lama..."
-            if docker compose down; then
-              echo "✅ Container lama berhasil dihentikan."
-            else
-              echo "⚠️  WARNING: Gagal menghentikan container (mungkin tidak berjalan)."
-              echo "   Lanjutkan proses..."
-            fi
-
-            # 3. Jalankan container baru
-            echo "▶️  Menjalankan container baru..."
-            if docker compose up -d; then
-              echo "✅ Container baru berhasil dijalankan."
-            else
-              echo "❌ ERROR: Gagal menjalankan container baru!"
-              echo "   Periksa log: docker compose logs"
-              exit 1
-            fi
-
-            # 4. Hapus image yang tidak terpakai
-            echo "🧹 Membersihkan image tidak terpakai..."
-            docker image prune -f
-
-            # =============================================
-            # SELESAI
-            # =============================================
-            echo "=========================================="
-            echo "🎉 DEPLOY SELESAI!"
-            echo "=========================================="
-            echo "✅ Container berhasil dijalankan."
-            echo "   Cek status: docker compose ps"
-            echo "   Cek log   : docker compose logs -f"
-
-      # ============================================
-      # STEP 6: Jika semua berhasil
-      # ============================================
-      - name: Deployment Success
-        if: success()
-        run: |
-          echo "=========================================="
-          echo "✅✅✅ DEPLOYMENT BERHASIL! ✅✅✅"
-          echo "=========================================="
-          echo "Aplikasi sudah di-deploy ke server ${{ secrets.SSH_HOST }}"
-
-      # ============================================
-      # STEP 7: Jika ada yang gagal, tampilkan pesan
-      # ============================================
-      - name: Deployment Failed
-        if: failure()
-        run: |
-          echo "=========================================="
-          echo "❌❌❌ DEPLOYMENT GAGAL! ❌❌❌"
-          echo "=========================================="
-          echo ""
-          echo "Periksa log di atas untuk melihat error detail."
-          echo ""
-          echo "Error yang sering terjadi:"
-          echo "1. 'i/o timeout'        → Firewall IDCloudHost masih menutup port SSH."
-          echo "2. 'Permission denied'  → SSH Key salah atau tidak cocok."
-          echo "3. 'Direktori tidak ditemukan' → Folder /var/www/techease belum dibuat."
-          echo "4. 'docker compose' not found → Install docker compose di server."
-          echo "5. 'pull image gagal'   → Username/password Docker Hub salah, atau image tidak ada."
-          echo ""
-          echo "Solusi: Ikuti petunjuk di log step yang gagal."
-          echo "=========================================="
-          exit 1
+          set -e
+          cd /var/www/techease
+          docker compose pull app
+          docker compose down || true
+          docker compose up -d
+          docker image prune -f
+          echo "✅ Deploy selesai!"
