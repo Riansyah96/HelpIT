@@ -3,11 +3,13 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - main   # atau branch produksi Anda
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true   # Hilangkan peringatan Node 20
 
     steps:
       - name: Checkout code
@@ -38,31 +40,14 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /var/www/techease
-            # Tarik image terbaru
             docker compose pull app
-            # Jalankan ulang container
             docker compose down
             docker compose up -d
-
-            # Tunggu beberapa detik agar container siap
             sleep 5
-
-            # Jalankan migrasi (jika ada)
             docker compose exec -T app php artisan migrate --force
-
-            # Bersihkan cache Laravel
             docker compose exec -T app php artisan config:clear
             docker compose exec -T app php artisan cache:clear
             docker compose exec -T app php artisan view:clear
             docker compose exec -T app php artisan route:clear
-
-            # (Opsional) Optimasi untuk produksi
-            docker compose exec -T app php artisan config:cache
-            docker compose exec -T app php artisan route:cache
-            docker compose exec -T app php artisan view:cache
-
-            # Restart app agar benar-benar segar (opsional)
             docker compose restart app
-
-            # Bersihkan image lama (optional)
             docker image prune -f
