@@ -91,7 +91,7 @@
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Muhammad Arkan Al Hakim</h5>
                     <p class="text-primary text-xs font-black uppercase tracking-widest mb-4">Developer</p>
-                    <p class="text-sm text-text/70">Mengimplementasikan fitur dan melakukan perbaikan bug secara intensif.</p>
+                    <p class="text-sm text-text/70">Mengimplementasikan fitur dan melakukan perbaikan bug secara Intensif.</p>
                 </div>
 
                 <!-- 4. Muhamad Yordan Al zisky - Design -->
