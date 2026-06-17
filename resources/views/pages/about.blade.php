@@ -99,7 +99,7 @@
                     <div class="relative mb-6 inline-block">
                         <div class="absolute inset-0 bg-accent rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
                         <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-surface shadow-2xl mx-auto">
-                            <img src="{{ asset('assets/img/team/yordan.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhamad+Yordan+Al+zisky&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('assets/img/team/jordan.jpg') }}" onerror="this.src='https://ui-avatars.com/api/?name=Muhamad+Yordan+Al+zisky&background=F59E0B&color=fff&size=200'" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         </div>
                     </div>
                     <h5 class="text-xl font-black text-white mb-1">Muhamad Yordan Al zisky</h5>
