@@ -14,10 +14,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0EA5E9',
+                        primary: '#FF2A54',
+                        secondary: '#7B2FBE',
                         background: '#0F172A',
                         surface: '#1E293B',
-                        accent: '#F59E0B',
                         text: '#E2E8F0',
                     }
                 }
@@ -36,8 +36,6 @@
             transition: background-color .3s, color .3s; 
             margin: 0;
             padding: 0;
-            background-color: #0F172A;
-            color: #E2E8F0;
         }
         .pt-safe { 
             padding-top: 5rem; 
@@ -48,11 +46,74 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        /* Efek neon glow */
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(255, 42, 84, 0.4), 0 0 30px rgba(123, 47, 190, 0.2);
+        }
+        .neon-border {
+            border: 2px solid rgba(255, 42, 84, 0.3);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .neon-border:hover {
+            border-color: #FF2A54;
+            box-shadow: 0 0 20px rgba(255, 42, 84, 0.5), 0 0 40px rgba(123, 47, 190, 0.3);
+        }
+        .dark .neon-border {
+            border-color: rgba(123, 47, 190, 0.3);
+        }
+        .dark .neon-border:hover {
+            border-color: #7B2FBE;
+            box-shadow: 0 0 20px rgba(123, 47, 190, 0.5), 0 0 40px rgba(255, 42, 84, 0.3);
+        }
+        /* Efek gradien neon untuk teks */
+        .text-neon {
+            background: linear-gradient(135deg, #FF2A54, #7B2FBE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-neon-light {
+            background: linear-gradient(135deg, #FF2A54, #7B2FBE, #FF2A54);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: neon-shimmer 3s ease-in-out infinite;
+        }
+        @keyframes neon-shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Pulse neon */
+        .neon-pulse {
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+        @keyframes neon-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 42, 84, 0.4), 0 0 30px rgba(123, 47, 190, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 42, 84, 0.7), 0 0 50px rgba(123, 47, 190, 0.4); }
+        }
+        /* Background dengan bintang */
+        .bg-stars {
+            background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-size: 200px 200px;
+        }
+        .dark .bg-stars {
+            background-image: radial-gradient(2px 2px at 20px 30px, #7B2FBE, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 40px 70px, #FF2A54, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 50px 160px, #7B2FBE, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 90px 40px, #FF2A54, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 130px 80px, #7B2FBE, rgba(0,0,0,0));
+        }
     </style>
     
     @stack('styles')
 </head>
-<body class="bg-background text-text min-h-screen">
+<body class="bg-gray-50 dark:bg-background text-gray-800 dark:text-text min-h-screen bg-stars">
     <!-- Navigation -->
     @include('layouts.partials.navbar')
     
@@ -67,14 +128,16 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
-        // Dark Mode Toggle (disesuaikan dengan palet gelap)
+        // Dark Mode Toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         
         function initDarkMode() {
-            // Selalu gunakan tema gelap
-            document.documentElement.classList.add('dark');
-            updateThemeIcon(true);
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+            document.documentElement.classList.toggle('dark', isDark);
+            updateThemeIcon(isDark);
         }
         
         function updateThemeIcon(isDark) {
@@ -95,7 +158,7 @@
                 });
             }
             
-            // Initialize animations (sama seperti semula)
+            // Initialize animations
             if (window.FramerMotion) {
                 const { animate } = window.FramerMotion;
                 
