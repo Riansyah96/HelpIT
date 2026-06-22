@@ -1,9 +1,12 @@
 services:
   app:
-    image: your-dockerhub-username/laravel-app:latest   # ganti dengan username Anda
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: app
     restart: unless-stopped
-    # Volume mount untuk kode TIDAK ADA di sini
+    volumes:
+      - .:/var/www   # tambahkan ini
     depends_on:
       - db
     networks:
@@ -34,8 +37,10 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/nginx/ssl:ro
       # Mount storage dan cache agar persist (opsional)
+      - .:/var/www                     
       - ./storage:/var/www/storage
       - ./bootstrap/cache:/var/www/bootstrap/cache
+      - /etc/letsencrypt:/etc/nginx/ssl:ro
     depends_on:
       - app
     networks:
